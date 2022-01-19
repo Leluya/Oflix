@@ -8,3 +8,4 @@
 | `/favorites` | `GET`        | `MainController` | `favotites`  | O'flix - Mes favories| Page des favories d'un utilisateur |
 | `/api/movies` | `GET`        | `ApiController` | `list`  | - | liste des movies |
 | `/api/movies/{id}` | `GET`        | `ApiController` | `movies_get`  | - | toutes les informations d'un movie |
+| `/theme/toggle` | `GET`        | `MainController` | `themeSwitcher`  | - | changement de théme |

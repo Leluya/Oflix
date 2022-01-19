@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Models\Movies;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -73,6 +74,38 @@ class MainController extends AbstractController
     public function favorites()
     {
         return $this->render('main/favorites.html.twig');
+    }
+
+    /**
+     * changement de them
+     *
+     * @Route("/theme/toggle", name="theme_switcher")
+     */
+    public function themeSwitcher(SessionInterface $session)
+    {
+        // TODO deplcaer dans le UserController
+        // j'ai besoin d'une classe gérée par le FW
+        // Cette classe, je veux que le FW me l'instancie/crée en auto
+        // Pour cela j'utilise le principê d'injection de dépendance
+
+        //Mon code est dépendant d'une classe  : SessionInterface
+
+        // Objectif pouvoir changer de theme
+        // stocker le nom du theme actif, et/ou passer à l'autre theme
+
+        // $_SESSION['theme']
+        // fournit 'netflix' si la clé 'theme" n'existe pas
+        // sinon fournit la valeur stocké
+        $theme = $session->get('theme', 'netflix');
+
+        if ($theme == 'netflix'){
+            $session->set('theme', 'allocine');
+        }else{
+            $session->set('theme', 'netflix');
+        }
+        // ob redirige l'utilisateur vers la home
+        // TODO UX vers la page courante
+        return $this->redirectToRoute("main_home");
     }
 
 }
